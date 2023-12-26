@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserInterface } from 'src/interfaces/user.interface';
 import { UserService } from './user.service';
+import { UserPipes } from './user.pipes';
 
 @Controller('user')
 export class UserController {
@@ -9,6 +10,7 @@ export class UserController {
   constructor(private userService: UserService) {
     this.UserList = [
       {
+        id: 1,
         name: 'Manoj Santra',
         marks: 49,
         role: 43,
@@ -22,7 +24,7 @@ export class UserController {
     return this.UserList;
   }
   @Post('/')
-  addUser(@Body() newUser: UserInterface): string {
+  addUser(@Body(UserPipes) newUser: UserInterface): string {
     return this.userService.addUser(this.UserList, newUser);
   }
 }

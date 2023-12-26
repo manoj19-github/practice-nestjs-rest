@@ -4,4 +4,5 @@ export interface UserInterface {
   marks: number;
   role: number;
   address: string;
+  id:number;
 }
