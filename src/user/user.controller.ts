@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
 import { UserInterface } from 'src/interfaces/user.interface';
 import { UserService } from './user.service';
 import { UserPipes } from './user.pipes';
+import { UserDTO } from './user.dto';
 
 @Controller('user')
 export class UserController {
@@ -24,7 +25,9 @@ export class UserController {
     return this.UserList;
   }
   @Post('/')
-  addUser(@Body(UserPipes) newUser: UserInterface): string {
+  addUser(
+    @Body(new UserPipes(), new ValidationPipe()) newUser: UserDTO,
+  ): string {
     return this.userService.addUser(this.UserList, newUser);
   }
 }
