@@ -6,6 +6,7 @@ import { UserMiddleware } from './user.middleware';
 @Module({
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 export class UserModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
